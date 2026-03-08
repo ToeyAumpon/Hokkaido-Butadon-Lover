@@ -1,0 +1,24 @@
+{
+  "name": "hokkaido-butadon-lover",
+  "version": "1.0.0",
+  "description": "\"FOR WHO LOVE BUTADON LIKE ME\"\r A web application to track and rate the best 豚丼 (pork bowl) restaurants in Hokkaido, Japan.\r Built as a portfolio project to demonstrate a full CI/CD deployment pipeline on AWS.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ToeyAumpon/Hokkaido-Butadon-Lover.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ToeyAumpon/Hokkaido-Butadon-Lover/issues"
+  },
+  "homepage": "https://github.com/ToeyAumpon/Hokkaido-Butadon-Lover#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}

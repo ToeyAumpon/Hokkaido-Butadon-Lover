@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>北海道 豚丼</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="stylesheet.css">
+</head>
+<body>
+
+<header>
+  <div class="header-emoji">🐷</div>
+  <h1>北海道 豚丼 巡り</h1>
+  <p>HOKKAIDO BUTADON BUCKET LIST</p>
+  <div class="progress-wrap">
+    <div class="progress-label">
+      <span>訪問済み / Visited</span>
+      <span id="progress-text">0 / 8</span>
+    </div>
+    <div class="progress-bar-bg">
+      <div class="progress-bar-fill" id="progress-fill"></div>
+    </div>
+  </div>
+</header>
+
+<div class="filters">
+  <button class="filter-btn active" data-filter="all">全て All</button>
+  <button class="filter-btn" data-filter="obihiro">🗺 帯広</button>
+  <button class="filter-btn" data-filter="sapporo">🗺 札幌</button>
+  <button class="filter-btn" data-filter="unvisited">⬜ 未訪問</button>
+  <button class="filter-btn" data-filter="visited">✅ 訪問済み</button>
+</div>
+
+<div class="cards" id="cards-container"></div>
+
+<footer>🐷 Made with love for Hokkaido 豚丼</footer>
+
+<script>
+  const restaurants = [
+    { id: 1, name: "豚丼のぱんちょう", nameEn: "Butadon PANCHŌ", city: "obihiro", cityLabel: "帯広 Obihiro", address: "帯広市西1条南11丁目19", googleRating: 4.1, note: "The ORIGINAL butadon restaurant — est. 1933. Cash only, no photos inside." },
+    { id: 2, name: "豚丼のとん田",     nameEn: "Butadon no Tonta",  city: "obihiro", cityLabel: "帯広 Obihiro", address: "帯広市東10条南17丁目2", googleRating: 4.4, note: "Most popular in Obihiro. Expect a queue — worth every minute." },
+    { id: 3, name: "豚の家",           nameEn: "Buta no Ie",        city: "obihiro", cityLabel: "帯広 Obihiro", address: "帯広市西8条南11丁目1-2", googleRating: 4.6, note: "Highest rated in Obihiro. Super friendly staff, very local vibe." },
+    { id: 4, name: "豚丼一番 帯広本店", nameEn: "Butadon Ichiban",   city: "obihiro", cityLabel: "帯広 Obihiro", address: "帯広市大通南25丁目20-1", googleRating: 4.2, note: "Smoky flavor, tender pork. A local favorite with loyal regulars." },
+    { id: 5, name: "豚はげ",           nameEn: "Butahage",          city: "obihiro", cityLabel: "帯広 Obihiro", address: "帯広市西2条南12丁目9",  googleRating: 4.2, note: "Inside JR Obihiro Station. Convenient stop before your train." },
+    { id: 6, name: "十勝豚丼いっぴん", nameEn: "Tokachi Butadon Ippin", city: "sapporo", cityLabel: "札幌 Sapporo", address: "札幌市北5条西3丁目5 ステラプレイス6F", googleRating: 4.3, note: "Best butadon in Sapporo — inside Stellar Place near Sapporo Station." },
+    { id: 7, name: "豚丼マムロ",       nameEn: "Butadon Mamuro",    city: "sapporo", cityLabel: "札幌 Sapporo", address: "札幌市中央区南7条西6丁目", googleRating: 4.0, note: "Hidden gem in Susukino. Locals love it. Juicy pork with umami sauce." },
+    { id: 8, name: "とんどん。",       nameEn: "Tondon.",           city: "sapporo", cityLabel: "札幌 Sapporo", address: "札幌市豊平区中の島1条1丁目2-14", googleRating: 4.3, note: "Newly opened, already a neighborhood hit. Try adding the broth at the end!" },
+  ];
+
+  const ratingMsgs = ["", "イマイチ…", "普通", "美味しい！", "すごく美味しい！", "最高すぎる!!!🐷"];
+  const state = { visited: {}, ratings: {}, filter: "all", expanded: null };
+
+  function updateProgress() {
+    const count = Object.values(state.visited).filter(Boolean).length;
+    const total = restaurants.length;
+    document.getElementById("progress-text").textContent = `${count} / ${total}`;
+    document.getElementById("progress-fill").style.width = `${(count / total) * 100}%`;
+  }
+
+  function getFiltered() {
+    return restaurants.filter(r => {
+      if (state.filter === "visited")   return state.visited[r.id];
+      if (state.filter === "unvisited") return !state.visited[r.id];
+      if (state.filter === "obihiro")   return r.city === "obihiro";
+      if (state.filter === "sapporo")   return r.city === "sapporo";
+      return true;
+    });
+  }
+
+  function renderCards() {
+    const container = document.getElementById("cards-container");
+    container.innerHTML = "";
+    const filtered = getFiltered();
+
+    if (filtered.length === 0) {
+      container.innerHTML = `<div class="empty-msg">No restaurants in this filter yet.</div>`;
+      return;
+    }
+
+    filtered.forEach((r, i) => {
+      const isVisited = !!state.visited[r.id];
+      const myRating  = state.ratings[r.id] || 0;
+      const isExpanded = state.expanded === r.id;
+
+      const card = document.createElement("div");
+      card.className = "card" + (isVisited ? " visited" : "");
+      card.style.animationDelay = `${i * 0.05}s`;
+
+      const cityClass = r.city === "sapporo" ? "city-sapporo" : "city-obihiro";
+      const starsHtml = [1,2,3,4,5].map(s =>
+        `<span class="star ${s <= myRating ? 'filled' : ''}" data-id="${r.id}" data-val="${s}">★</span>`
+      ).join("");
+
+      card.innerHTML = `
+        <div class="card-header" data-id="${r.id}">
+          <div class="badge">${isVisited ? "✓" : r.id}</div>
+          <div class="card-info">
+            <div class="card-name">${r.name}</div>
+            <div class="card-meta">
+              <span class="card-name-en">${r.nameEn}</span>
+              <span class="city-tag ${cityClass}">${r.cityLabel}</span>
+            </div>
+            <div class="card-google-rating">
+              Google ★ ${r.googleRating}
+              ${myRating > 0 ? `<span class="my-rating-inline">自分: ${"★".repeat(myRating)}${"☆".repeat(5-myRating)}</span>` : ""}
+            </div>
+          </div>
+          <div class="chevron">${isExpanded ? "▲" : "▼"}</div>
+        </div>
+        <div class="card-detail ${isExpanded ? 'open' : ''}">
+          <p class="card-note">📝 ${r.note}</p>
+          <p class="card-address">📍 ${r.address}</p>
+          <div class="rating-label">自分の評価 My Rating:</div>
+          <div class="stars">${starsHtml}</div>
+          <div class="rating-msg" id="msg-${r.id}">${myRating > 0 ? ratingMsgs[myRating] : ""}</div>
+          <button class="visit-btn ${isVisited ? 'visited-btn' : ''}" data-id="${r.id}">
+            ${isVisited ? "✅ 訪問済み — 未訪問に戻す" : "☐ 訪問済みにする  Mark as Visited"}
+          </button>
+        </div>
+      `;
+      container.appendChild(card);
+    });
+
+    // Card header toggle
+    container.querySelectorAll(".card-header").forEach(el => {
+      el.addEventListener("click", () => {
+        const id = parseInt(el.dataset.id);
+        state.expanded = state.expanded === id ? null : id;
+        renderCards();
+      });
+    });
+
+    // Star rating
+    container.querySelectorAll(".star").forEach(el => {
+      el.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const id  = parseInt(el.dataset.id);
+        const val = parseInt(el.dataset.val);
+        state.ratings[id] = state.ratings[id] === val ? 0 : val;
+        renderCards();
+      });
+      el.addEventListener("mouseenter", () => el.style.transform = "scale(1.2)");
+      el.addEventListener("mouseleave", () => el.style.transform = "scale(1)");
+    });
+
+    // Visit button
+    container.querySelectorAll(".visit-btn").forEach(el => {
+      el.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const id = parseInt(el.dataset.id);
+        state.visited[id] = !state.visited[id];
+        updateProgress();
+        renderCards();
+      });
+    });
+  }
+
+  // Filter buttons
+  document.querySelectorAll(".filter-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      state.filter = btn.dataset.filter;
+      renderCards();
+    });
+  });
+
+  // Init
+  updateProgress();
+  renderCards();
+</script>
+</body>
+</html>
