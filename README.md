@@ -175,3 +175,10 @@ http://localhost:3000
 Made with love for Hokkaido 豚丼 by an IT student from Japan.
 
 **Live URL:** http://YOUR-EC2-IP:3000
+
+ now understand:
+- Why Docker exists — environment isolation
+- How a `Dockerfile` works — a recipe with cached layers
+- Why `package*.json` is copied first — layer caching optimization
+- What `.dockerignore` does — keeps the image clean and small
+- What `-p` does — opens a door between host and container
