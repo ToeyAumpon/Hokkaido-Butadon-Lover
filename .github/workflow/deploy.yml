@@ -15,3 +15,11 @@ jobs:
 
       - name: Build Docker image
         run: docker build -t butadon-app .
+
+# 1. คุณ git push โค้ดไปที่ main
+# 2. GitHub ตรวจพบ push
+# 3. GitHub Actions เริ่ม workflow อัตโนมัติ
+# 4. สร้าง Linux machine ใหม่ (runner)
+# 5. ดาวน์โหลดโค้ดจาก repo
+# 6. รัน docker build เพื่อสร้าง image
+# 7. ถ้าทุกอย่างสำเร็จ → pipeline ผ่าน (green check)

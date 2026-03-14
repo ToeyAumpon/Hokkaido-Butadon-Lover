@@ -182,3 +182,5 @@ Made with love for Hokkaido 豚丼 by an IT student from Japan.
 - Why `package*.json` is copied first — layer caching optimization
 - What `.dockerignore` does — keeps the image clean and small
 - What `-p` does — opens a door between host and container
+
+![CI](https://github.com/ToeyAumpon/Hokkaido-Butadon-Lover/actions/workflows/deploy.yml/badge.svg)
