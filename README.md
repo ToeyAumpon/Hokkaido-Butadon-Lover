@@ -184,6 +184,3 @@ docker run -p 3000:3000 butadon-app
 - [ ] User login — each user has their own bucket list
 
 ---
-
-## 🐷 About
-
