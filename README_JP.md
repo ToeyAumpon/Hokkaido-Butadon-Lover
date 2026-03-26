@@ -1,4 +1,4 @@
-# 🐷 北海道 豚丼 巡り
+# 🐷 北海道 豚丼
 
 ![CI](https://github.com/ToeyAumpon/Hokkaido-Butadon-Lover/actions/workflows/deploy.yml/badge.svg)
 
