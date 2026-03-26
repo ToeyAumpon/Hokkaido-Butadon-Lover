@@ -1,4 +1,4 @@
-# 🐷 北海道 豚丼 巡り — Hokkaido Butadon Bucket List
+# 🐷 北海道 豚丼 — Hokkaido Butadon Bucket List
 
 ![CI](https://github.com/ToeyAumpon/Hokkaido-Butadon-Lover/actions/workflows/deploy.yml/badge.svg)
 
