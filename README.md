@@ -31,7 +31,7 @@ Built to demonstrate a full CI/CD pipeline on AWS.
 
 ---
 
-## ✨ Features
+##  Features
 
 | Feature | Description |
 
@@ -134,7 +134,7 @@ docker run -p 3000:3000 butadon-app
 
 ---
 
-## 🔧 Problems I Faced & How I Fixed Them
+##  Problems I Faced & How I Fixed Them
 
 ### 1. `docker build` failed — COPY error
 - **Cause:** Missing `/` in `COPY package*.json .`
