@@ -12,7 +12,7 @@ Built to demonstrate a full CI/CD pipeline on AWS.
 
 ---
 
-## 📸 Live Demo
+##  Live Demo
 
 > Server terminated after demo.
 
@@ -21,9 +21,9 @@ Built to demonstrate a full CI/CD pipeline on AWS.
 
 ---
 
-## 💡 Why I Built This
+##  Why I Built This
 
-- I love 豚丼 and I am from Hokkaido 🐷
+- I love 豚丼 and I am from Hokkaido 
 - I want to work in infrastructure / cloud engineering after graduation
 - I wanted to learn real DevOps skills: Docker, CI/CD, Linux server, AWS
 
@@ -34,17 +34,16 @@ Built to demonstrate a full CI/CD pipeline on AWS.
 ## ✨ Features
 
 | Feature | Description |
-|---|---|
-| 🗺 Restaurant List | 8 real restaurants in Obihiro and Sapporo |
-| ✅ Visited Checkbox | Mark restaurants as visited — card turns green |
-| ⭐ Star Rating | Rate each restaurant 1–5 stars |
-| 🔍 Filter Tabs | Filter by city or visited / unvisited |
-| 📊 Progress Bar | Track how many restaurants you have visited |
+
+|  Restaurant List | 8 real restaurants in Obihiro and Sapporo |
+|  Visited Checkbox | Mark restaurants as visited — card turns green |
+|  Star Rating | Rate each restaurant 1–5 stars |
+|  Filter Tabs | Filter by city or visited / unvisited |
+|  Progress Bar | Track how many restaurants you have visited |
 
 ---
 
-## 🛠 Tech Stack
-
+## Tech Stack
 | Layer | Technology |
 |---|---|
 | Frontend | HTML5, CSS3, JavaScript |
@@ -56,7 +55,7 @@ Built to demonstrate a full CI/CD pipeline on AWS.
 
 ---
 
-## 🏗 Architecture
+##  Architecture
 
 ```
 Browser
@@ -75,15 +74,15 @@ GitHub Actions (triggers on every git push to main)
 
 ---
 
-## ⚙️ How It Works
+##  How It Works
 
 ### For Users
 ```
 1. Open the app in a browser
 2. Browse 8 real 豚丼 restaurants
 3. Click a card to see address and notes
-4. Rate it 1–5 stars ⭐
-5. Click "Mark as Visited" ✅
+4. Rate it 1–5 stars 
+5. Click "Mark as Visited" 
 6. Progress bar updates
 ```
 
@@ -92,12 +91,12 @@ GitHub Actions (triggers on every git push to main)
 git push → GitHub Actions triggers automatically
         → Build Docker image
         → Deploy to AWS EC2
-        → App is live 🌐
+        → App is live 
 ```
 
 ---
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 Hokkaido-Butadon-Lover/
@@ -115,7 +114,7 @@ Hokkaido-Butadon-Lover/
 
 ---
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### Run Locally
 ```bash
@@ -161,7 +160,7 @@ docker run -p 3000:3000 butadon-app
 
 ---
 
-## 📚 What I Learned
+##  What I Learned
 
 | Skill | What I understood |
 |---|---|
@@ -175,7 +174,7 @@ docker run -p 3000:3000 butadon-app
 
 ---
 
-## 🔮 Future Features
+##  Future Features
 
 - [ ] Google Maps embed — show restaurant locations on a map
 - [ ] Comment field — write personal notes per restaurant
